@@ -20,18 +20,18 @@
             <img :src="image" :class="{'out-of-stock-img': inventory === 0}">
         </div>
         <div class="product-info">
-            <h1><a :href="link">{{product}}</a></h1>
+            <h1><a :href="link">{{ title }}</a></h1>
             <p>{{description}}</p>
             <p v-if="inventory > 10">In Stock</p>
             <p v-else-if="inventory <= 10 && inventory > 0">Almost out of Stock</p>
             <p v-else>Out of Stock</p>
 
-            <p v-if="onSale">On Sale!</p>
+            <p v-if="onSale">{{ saleMessage }}</p>
             <ul>
                 <li v-for="detail in details">{{detail}}</li>
             </ul>
-            <div class="color-circle" :style="{ backgroundColor: variant.color }" v-for="variant in variants" :key="variant.id" @mouseover="updateImage(variant.image)">
-            </div>
+            <div class="color-circle" :style="{ backgroundColor: variant.color }" v-for="(variant, index) in variants" :key="variant.id" @mouseover="updateVariant(index)">
+        </div>
             <div>
                 <h3>Sizes:</h3>
                 <span v-for="size in sizes" :key="size">{{ size }}, </span>
